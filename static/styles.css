@@ -1,0 +1,143 @@
+:root {
+    --primary-color: #6c5ce7;
+    --secondary-color: #a29bfe;
+    --background-color: #1a1b2e;
+    --text-color: #ffffff;
+    --accent-color: #ffa502;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    background: linear-gradient(45deg, #6c5ce7, #a29bfe);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+}
+
+.balance {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--accent-color);
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
+    border-radius: 10px;
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.flight-path {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.path-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    pointer-events: none;
+}
+
+.path-fill {
+    display: none;
+}
+
+.character {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    left: 0;
+    bottom: 0;
+    transition: all 0.3s linear;
+    transform-origin: center center;
+    z-index: 2;
+}
+
+@keyframes floatAnimation {
+    0% { transform: translate(var(--x), var(--y)) rotate(var(--rotation)); }
+    50% { transform: translate(var(--x), calc(var(--y) - 20px)) rotate(var(--rotation)); }
+    100% { transform: translate(var(--x), var(--y)) rotate(var(--rotation)); }
+}
+
+.character.flying {
+    animation: floatAnimation 2s infinite ease-in-out;
+}
+
+.character.crashed {
+    transition: transform 0.5s cubic-bezier(.36,.07,.19,.97);
+}
+
+.character.cashed-out {
+    transition: transform 1.5s cubic-bezier(.36,.07,.19,.97);
+}
+
+.multiplier-display {
+    position: absolute;
+    font-size: 2em;
+    color: var(--secondary-color);
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+
+.signal-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    margin-top: 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.signal-button:hover {
+    background-color: #ff9f43;
+}
+
+.signal-button:disabled {
+    background-color: #4a4a4a;
+    cursor: not-allowed;
+}
